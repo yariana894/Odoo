@@ -1,0 +1,89 @@
+<odoo>
+    <data>
+
+        <!--vista formulario-->
+        <record model="ir.ui.view" id="vehiculo_form_view">
+            <field name="name">vehiculo.form</field>
+            <field name="model">viajes.vehiculo</field>
+            <field name="arch" type="xml">
+                <form string="Formulario de Vehiculo">
+                    <sheet>
+                        <group>
+                            <field name="modelo"/>
+                            <field name="marca"/>
+                            <field name="propietario_id"/>
+                        </group>
+                        <notebook>
+                            <page string="Descripcion">
+                                <field name="descripcion"/>
+                            </page>
+                            <page string="Acerca de">
+                                Esto es un ejemplo
+                            </page>
+
+                            <page string="Viajes">
+                                <field name="viaje_ids">
+                                    <tree string="Viajes registrados">
+                                        <field name="titulo"/>
+                                        <field name="conductor_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--vista listado-->
+        <!-- override the automatically generated list view for vehiculos -->
+        <record model="ir.ui.view" id="vehiculo_tree_view">
+            <field name="name">vehiculo.tree</field>
+            <field name="model">viajes.vehiculo</field>
+            <field name="arch" type="xml">
+                <tree string="Vehiculo Tree">
+                    <field name="modelo"/>
+                    <field name="marca"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <!--vista para buscar por marca y modelo-->
+        <record model="ir.ui.view" id="vehiculo_search_view">
+            <field name="name">vehiculo.search</field>
+            <field name="model">viajes.vehiculo</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="marca"/>
+                    <field name="descripcion"/>
+
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="vehiculo_list_action">
+
+            <field name="name">Vehiculos</field>
+            <field name="res_model">viajes.vehiculo</field>
+            <!--<field name="view_type">form</field>-->
+            <field name="view_mode">tree,form,graph</field>
+        </record>
+
+        <!-- top level menu: no parent -->
+        <menuitem id="main_viajes_menu" name="Viajes"/>
+        <!-- A first level in the left side menu is needed
+             before using action= attribute -->
+        <menuitem id="viajes_menu" name="Viajes"
+                  parent="main_viajes_menu"/>
+        <!-- the following menuitem should appear *after*
+             its parent openacademy_menu and *after* its
+             action course_list_action -->
+        <menuitem id="vehiculo_menu" name="Vehiculos"
+                  parent="viajes_menu"
+                  action="vehiculo_list_action"/>
+        <!-- Full id location:
+             action="openacademy.course_list_action"
+             It is not required when it is the same module -->
+    </data>
+</odoo>

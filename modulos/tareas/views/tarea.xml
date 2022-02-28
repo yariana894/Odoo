@@ -1,0 +1,55 @@
+<odoo>
+    <data>
+        <!-- session form view -->
+        <record model="ir.ui.view" id="tarea_form_view">
+            <field name="name">tarea.form</field>
+            <field name="model">tareas.tarea</field>
+            <field name="arch" type="xml">
+                <form string="Formulario de Tareas">
+                    <sheet>
+                        <group>
+                            <group string="General">
+                                <field name="persona_id"/>
+                                <field name="titulo"/>
+                                <field name="jefe_id"/>
+                                <field name="finalizado"/>
+                            </group>
+                            <group string="Calendario">
+                                <field name="fecha_inicio"/>
+                                <field name="duracion"/>
+                                <field name="plazas"/>
+                                <field name="plazas_ocupadas" widget="progressbar"/>
+                            </group>
+                        </group>
+                        <label for="equipos_ids"/>
+                        <field name="equipos_ids"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="tarea_tree_view">
+            <field name="name">tarea.tree</field>
+            <field name="model">tareas.tarea</field>
+            <field name="arch" type="xml">
+                <tree string="Tarea Tree">
+                    <field name="titulo"/>
+                    <field name="persona_id"/>
+                    <field name="duracion"/>
+                    <field name="plazas_ocupadas" widget="progressbar"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="tarea_list_action">
+            <field name="name">Tareas</field>
+            <field name="res_model">tareas.tarea</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="tarea_menu" name="Tareas"
+                  parent="tareas_menu"
+                  action="tarea_list_action"/>
+
+    </data>
+</odoo>

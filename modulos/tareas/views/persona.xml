@@ -1,0 +1,83 @@
+<odoo>
+    <data>
+
+        <!--cambiar formulario al crear o visualizar-->
+        <record model="ir.ui.view" id="persona_form_view">
+            <field name="name">persona.form</field>
+            <field name="model">tareas.persona</field>
+            <field name="arch" type="xml">
+                <form string="Formulario de Personas">
+                    <sheet>
+                        <group>
+                            <field name="nombre"/>
+                            <field name="asignatura"/>
+                            <field name="empleado_id"/>
+                        </group>
+                        <notebook>
+                            <page string="Descripcion">
+                                <field name="descripcion"/>
+                            </page>
+                            <page string="Acerca de">
+                                Esto es un ejemplo
+                            </page>
+                            <page string="Tareas">
+                                <field name="tarea_ids">
+                                    <tree string="Tareas registradas">
+                                        <field name="titulo"/>
+                                        <field name="jefe_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--para visualizar los datos en el menú principal-->
+        <record model="ir.ui.view" id="persona_tree_view">
+            <field name="name">persona.tree</field>
+            <field name="model">tareas.persona</field>
+            <field name="arch" type="xml">
+                <tree string="Persona Tree">
+                    <field name="nombre"/>
+                    <field name="asignatura"/>
+                    <field name="empleado_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--formulario de búsqueda-->
+        <record model="ir.ui.view" id="persona_search_view">
+            <field name="name">persona.search</field>
+            <field name="model">tareas.persona</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="nombre"/>
+                    <field name="descripcion"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="persona_list_action">
+            <field name="name">Personas</field>
+            <field name="res_model">tareas.persona</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context" eval="{'search_default_my_personas': 1}"/>
+
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_smiling_face">Crear el primera persona
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="main_tareas_menu" name="Tareas"/>
+        <menuitem id="tareas_menu" name="Tareas"
+                  parent="main_tareas_menu"/>
+        <menuitem id="persona_menu" name="Personas"
+                  parent="tareas_menu"
+                  action="persona_list_action"/>
+
+    </data>
+</odoo>

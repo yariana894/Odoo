@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+          <record id="object0" model="tareas.tareas">
+            <field name="nombre">Yariana Lopez</field>
+            <field name="asignatura">Matemáticas</field>
+          </record>
+
+          <record id="object1" model="tareas.tareas">
+            <field name="nombre">Lugan Oscar</field>
+            <field name="asignatura">Lengua</field>
+          </record>
+    </data>
+</odoo>

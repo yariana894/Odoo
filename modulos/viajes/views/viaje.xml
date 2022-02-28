@@ -1,0 +1,61 @@
+<odoo>
+    <data>
+
+
+        <!--cuando cree un viaje o editar un viaje o ver un viaje-->
+        <!-- session form view -->
+        <record model="ir.ui.view" id="viaje_form_view">
+            <field name="name">viaje.form</field>
+            <field name="model">viajes.viaje</field>
+            <field name="arch" type="xml">
+                <form string="Formulario de Viajes">
+                    <sheet>
+                        <group>
+                            <group string="General">
+                                <field name="vehiculo_id"/>
+                                <field name="titulo"/>
+                                <field name="conductor_id"/>
+                                <field name="finalizado"/>
+                            </group>
+                            <group string="Calendario">
+                                <field name="fecha_inicio"/>
+                                <field name="duracion"/>
+                                <field name="plazas"/>
+                                <field name="plazas_ocupadas" widget="progressbar"/>
+                            </group>
+                        </group>
+                        <label for="pasajeros_ids"/>
+                        <field name="pasajeros_ids"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--ver el listado de los viajes-->
+        <record model="ir.ui.view" id="viaje_tree_view">
+            <field name="name">viaje.tree</field>
+            <field name="model">viajes.viaje</field>
+            <field name="arch" type="xml">
+                <tree string="Viaje Tree">
+                    <field name="titulo"/>
+                    <field name="duracion"/>
+                    <field name="vehiculo_id"/>
+                    <field name="plazas_ocupadas" widget="progressbar"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--visualiza las vistas de lista y formulario-->
+        <record model="ir.actions.act_window" id="viaje_list_action">
+            <field name="name">Viajes</field>
+            <field name="res_model">viajes.viaje</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--visualiza la lista y el formulario-->
+        <menuitem id="viaje_menu" name="Viajes"
+                  parent="viajes_menu"
+                  action="viaje_list_action"/>
+
+    </data>
+</odoo>

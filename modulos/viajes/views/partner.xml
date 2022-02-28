@@ -1,0 +1,50 @@
+<odoo>
+    <data>
+
+
+        <record model="ir.actions.act_window" id="contact_list_action">
+            <field name="name">Contacts</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="contact_cat_list_action">
+            <field name="name">Viajeros categorias</field>
+            <field name="res_model">res.partner.category</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record model="res.partner.category" id="conductor1">
+            <field name="name">Conductor / Novel</field>
+        </record>
+        <record model="res.partner.category" id="conductor2">
+            <field name="name">Conductor / Experto</field>
+        </record>
+
+        <menuitem id="configuration_menu" name="Configuration" parent="main_viajes_menu"/>
+        <menuitem id="contact_menu" name="Viajeros" parent="configuration_menu" action="contact_list_action"/>
+
+        <record model="ir.ui.view" id="partner_conductor_form_view">
+            <field name="name">partner.conductor</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Viajes realizados">
+                        <group>
+                            <field name="conductor"/>
+                            <field name="viaje_ids"/>
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <menuitem id="contact_cat_menu" name="Viajeros Tags" parent="configuration_menu"
+                  action="contact_cat_list_action"/>
+
+    </data>
+
+</odoo>
